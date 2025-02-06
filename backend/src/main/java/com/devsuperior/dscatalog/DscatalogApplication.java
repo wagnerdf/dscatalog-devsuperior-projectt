@@ -8,6 +8,7 @@ public class DscatalogApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DscatalogApplication.class, args);
+		/* Testando SSH para nova estação de trabalho */
 	}
 
 }
