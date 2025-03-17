@@ -65,7 +65,7 @@
 			<exclusions>
 				<exclusion>
 					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-enginer</artifactId>
+					<artifactId>junit-vintage-engine</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
