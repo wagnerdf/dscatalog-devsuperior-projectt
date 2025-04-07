@@ -1,6 +1,7 @@
 package com.devsuperior.dscatalog.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,6 +17,15 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @EnableAuthorizationServer
 public class AuthorizatinServerConfig extends AuthorizationServerConfigurerAdapter{
 
+	@Value("${security.oauth2.client.client-id}")
+	private String clientId;
+	
+	@Value("${security.oauth2.client.client-secret}")
+	private String clientSecret;
+	
+	@Value("${jwt.duration}")
+	private Integer jwtDuration;
+	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
@@ -36,11 +46,11 @@ public class AuthorizatinServerConfig extends AuthorizationServerConfigurerAdapt
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception { // Configuração da forma que vai ser feita a autenticação
 		clients.inMemory() //Processo vai ser feito em memoria
-		.withClient("dscatalog") // Informar o nome da aplicação
-		.secret(passwordEncoder.encode("dscatalog123")) // Senha provisória da aplicação
+		.withClient(clientId) // Informar o nome da aplicação
+		.secret(passwordEncoder.encode(clientSecret)) // Senha provisória da aplicação
 		.scopes("read", "write") // Tipos de acesso da aplicação para leitura e escrita
 		.authorizedGrantTypes("password") // Tipo de acesso oauth
-		.accessTokenValiditySeconds(86400);// Tempo de expiração do token de 24 horas
+		.accessTokenValiditySeconds(jwtDuration);// Tempo de expiração do token
 	}
 
 	@Override
