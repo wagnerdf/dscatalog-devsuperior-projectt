@@ -55,7 +55,7 @@ public class AuthorizatinServerConfig extends AuthorizationServerConfigurerAdapt
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception { // Configuração da forma que vai ser feita a autenticação
 		clients.inMemory() //Processo vai ser feito em memoria
 		.withClient(clientId) // Informar o nome da aplicação
-		.secret(passwordEncoder.encode(clientSecret)) // Senha provisória da aplicação
+		.secret(passwordEncoder.encode(clientSecret)) // Senha da aplicação
 		.scopes("read", "write") // Tipos de acesso da aplicação para leitura e escrita
 		.authorizedGrantTypes("password") // Tipo de acesso oauth
 		.accessTokenValiditySeconds(jwtDuration);// Tempo de expiração do token
